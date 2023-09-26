@@ -2,6 +2,7 @@ import Layout from "../components/Layout";
 import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Cliente from "../components/Cliente";
 
 const OBTENER_CLIENTES_VENDEDOR = gql`
   query obtenerClientesVendedor {
@@ -34,21 +35,13 @@ export default function Index() {
             <th className="w-1/5 py-2">Nombre</th>
             <th className="w-1/5 py-2">Empresa</th>
             <th className="w-1/5 py-2">Email</th>
+            <th className="w-1/5 py-2">Eliminar</th>
+            <th className="w-1/5 py-2">Editar</th>
           </thead>
           <tbody className="bg-white">
             {!loading &&
               data.obtenerClientesVendedor.map((cliente) => (
-                <tr key={cliente.id}>
-                  <td className="border px-4 py-2 text-zinc-200">
-                    {cliente.nombre} {cliente.apellido}
-                  </td>
-                  <td className="border px-4 py-2 text-zinc-200">
-                    {cliente.empresa}
-                  </td>
-                  <td className="border px-4 py-2 text-zinc-200">
-                    {cliente.email}
-                  </td>
-                </tr>
+                <Cliente id={cliente.id} cliente={cliente} />
               ))}
           </tbody>
         </table>
